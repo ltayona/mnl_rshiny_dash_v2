@@ -15,7 +15,7 @@ require(highcharter)
 ##############################################################################################################################
 # reading from googlesheets LOB/Site level
 ##############################################################################################################################
-#setwd("/mnt/cephfs/hadoop-compute/phoenix/sourav.pal/metrics_v1/")
+#setwd("")
 options("httr_oob_default" = TRUE)
 token <- gs_auth()
 saveRDS(token,"googlesheets_token_1.rds")
