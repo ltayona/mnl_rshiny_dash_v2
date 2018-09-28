@@ -50,6 +50,8 @@ ui <- dashboardPage(
                          
                         menuSubItem("Shrinkage", tabName = "Shrinkage", icon = icon("alarm-clock")),
                         menuSubItem("Headcount", tabName = "Headcount", icon = icon("users"))
+                        #menuSubItem("Schedule Adherence", tabName = "Schedule Adherence", icon = icon("hourglass")),
+                        #menuSubItem("Attrition", tabName = "Attrition", icon = icon("hourglass"))
                          
                 )         
                 
