@@ -17,8 +17,12 @@ server <- function(input, output, session) {
   ##highcharter theme
   newtheme <- hc_theme_merge(
     getOption("highcharter.theme"),
-    hc_theme(colors = c("#0074D9","#047878","#FFB733","#F57336","#7E827A"))
+    hc_theme_darkunica(),
+    hc_theme(
+      colors = c("#0074D9","#047878","#FFB733","#F57336","#7E827A")
+      )
   )
+
   
   options(highcharter.theme = newtheme) #setting theme as default
   
@@ -1763,11 +1767,12 @@ server <- function(input, output, session) {
       highchart() %>%
         hc_chart(zoomType = "x") %>%
         hc_title(text = "Weekly 6H SLA") %>%
-        hc_yAxis(title = list(text = "SLA")) %>%
+        hc_yAxis(title = list(text = "6H SLA")) %>%
         hc_tooltip(crosshairs = T, shared = T) %>%
         hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
         hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
-        hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_6H, group = LOB))}
+        hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_6H, group = LOB))
+      }
     else if(length(input$SLA_inside_filter)==1){
       highchart() %>%
         hc_chart(zoomType = "x") %>%
@@ -1783,48 +1788,48 @@ server <- function(input, output, session) {
       highchart() %>%
         hc_chart(zoomType = "x") %>%
         hc_title(text = "Weekly 6H SLA") %>%
-        hc_yAxis(title = list(text = "SLA"),min=0) %>%
+        hc_yAxis(title = list(text = "SLA")) %>%
         hc_tooltip(crosshairs = T, shared = T) %>%
         hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
         hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
-        hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_6H, group= LOB))}
-    
+        hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_6H, group= LOB)) }
+  
   })
   
- # output$SLA_24h_plot <- renderHighchart({
- #   
- #   
- #   if(input$SLA_inside_filter=="All" & input$SLA_level_filter_type=="LOB"){
- #     highchart() %>%
- #       hc_chart(zoomType = "x") %>%
- #       hc_title(text = "Weekly 24H SLA") %>%
- #       hc_yAxis(title = list(text = "SLA")) %>%
- #       hc_tooltip(crosshairs = T, shared = T) %>%
- #       hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
- #       hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
- #       hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_24H, group = LOB))}
- #   else if(length(input$SLA_inside_filter)==1){
- #     highchart() %>%
- #       hc_chart(zoomType = "x") %>%
- #       hc_title(text = "Weekly SLA") %>%
- #       hc_yAxis(title = list(text = "SLA"),min=0) %>%
- #       hc_tooltip(crosshairs = T, shared = T) %>%
- #       hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
- #       hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
- #       hc_add_series(SLA_table(), "line",name="6H First Response", hcaes(x = Week , y = first_response_6H)) %>%
- #       hc_add_series(SLA_table(), "line",name="24H First Response", hcaes(x = Week , y = first_response_24H))} 
- #   
- #   else if(input$SLA_level_filter_type=="LOB"){
- #     highchart() %>%
- #       hc_chart(zoomType = "x") %>%
- #       hc_title(text = "Weekly 24H SLA") %>%
- #       hc_yAxis(title = list(text = "SLA"),min=0) %>%
- #       hc_tooltip(crosshairs = T, shared = T) %>%
- #       hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
- #       hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
- #       hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_24H, group= LOB))}
- #   
- # })
+output$SLA_24h_plot <- renderHighchart({
+  
+  
+  if(input$SLA_inside_filter=="All" & input$SLA_level_filter_type=="LOB"){
+    highchart() %>%
+      hc_chart(zoomType = "x") %>%
+      hc_title(text = "Weekly 24H SLA") %>%
+      hc_yAxis(title = list(text = "SLA")) %>%
+      hc_tooltip(crosshairs = T, shared = T) %>%
+      hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
+      hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
+      hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_24H, group = LOB))}
+  else if(length(input$SLA_inside_filter)==1){
+    highchart() %>%
+      hc_chart(zoomType = "x") %>%
+      hc_title(text = "Weekly SLA") %>%
+      hc_yAxis(title = list(text = "SLA"),min=0) %>%
+      hc_tooltip(crosshairs = T, shared = T) %>%
+      hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
+      hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
+      hc_add_series(SLA_table(), "line",name="6H First Response", hcaes(x = Week , y = first_response_6H)) %>%
+      hc_add_series(SLA_table(), "line",name="24H First Response", hcaes(x = Week , y = first_response_24H))} 
+  
+  else if(input$SLA_level_filter_type=="LOB"){
+    highchart() %>%
+      hc_chart(zoomType = "x") %>%
+      hc_title(text = "Weekly 24H SLA") %>%
+      hc_yAxis(title = list(text = "SLA"),min=0) %>%
+      hc_tooltip(crosshairs = T, shared = T) %>%
+      hc_subtitle(text = list('Highlight along the x-axis to zoom; Click Legends to enable/disable')) %>%
+      hc_xAxis(type = "datetime", dateTimeLabelFormats = list(day = '%e of %b')) %>%
+      hc_add_series(SLA_table(), "line", hcaes(x = Week , y = first_response_24H, group= LOB))}
+  
+})
   
   
   ## Shrinkage Data Tab

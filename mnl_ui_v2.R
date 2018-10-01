@@ -129,9 +129,11 @@ ui <- dashboardPage(
                                                ),
                                       collapsible = T, collapsed = F
                            )),
-                           fluidRow(column(width = 12, downloadButton('downloadData_Overview', 'Click here to Download csv'),align="right"),
+                          
+                          
+                           column(width = 12, downloadButton('downloadData_Overview', 'Click here to Download csv'),align="right"),
                             fluidRow(box(width = 12, title = "Overview", status="primary" ,solidHeader = TRUE, DT::dataTableOutput("Overview_table"), collapsible = T, collapsed = F))
-                                        )
+                                        
                            
                            )
                        
@@ -507,7 +509,7 @@ ui <- dashboardPage(
                            )),
                            
                            fluidRow(box(width = 12, title = "Charts", status="primary" ,solidHeader = TRUE,highchartOutput("SLA_6h_plot"), collapsible = T, collapsed = F)),
-                           #fluidRow(box(width = 12, title = "Charts", status="primary" ,solidHeader = TRUE,highchartOutput("SLA_24h_plot"), collapsible = T, collapsed = F)),
+                           fluidRow(box(width = 12, title = "Charts", status="primary" ,solidHeader = TRUE,highchartOutput("SLA_24h_plot"), collapsible = T, collapsed = F)),
                            fluidRow(column(width = 12, downloadButton('downloadData_SLA', 'Click here to Download csv'),align="right"),
                                     box(width = 12, title = "Service Level", status="primary",solidHeader = TRUE, DT::dataTableOutput("SLA_table"), collapsible = T, collapsed = F))
               ))),
