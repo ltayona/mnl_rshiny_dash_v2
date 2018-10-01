@@ -34,7 +34,7 @@ site_data<-lob_data[lob_data$line_of_business=="SITE",]
 site_data_diff<-sqldf("Select 
                       performance_week as Week,
                       'COE-UBR-MNL' as Site,
-                      (bliss_solves+liveops_solves+jira_solves) as Actual_Solved,
+                      (bliss_solves+liveops_solves+jira_solves+zd_solves) as Actual_Solved,
                       (csat_survey + liveops_csat_score) as 'Actual_Responses',
                       round(Target_CSAT,2) as Target_CSAT,
                       round(CSAT,2) as Actual_CSAT,
@@ -63,6 +63,25 @@ site_data_diff<-sqldf("Select
 
 site_data_diff$Week<-as.Date(site_data_diff$Week)
 
+# subsetting site level data
+site_data<-lob_data[lob_data$line_of_business=="SITE",]
+
+site_solved_data_diff<-sqldf("Select 
+                            
+                            performance_week as Week,
+                            'COE-UBR-MNL' as Site,
+                            bliss_solves as Bliss_Solved,
+                            liveops_solves as Liveops_Solved,
+                            jira_solves as JIRA_Solved,
+                            zd_solves as Zendesk_Solved
+                            
+                            from lob_data")
+
+site_solved_data_diff$Week<-as.Date(site_solved_data_diff$Week)
+
+
+
+
 #subsetting LOB level data
 lob_data<-lob_data[!lob_data$line_of_business %in% c("SITE"),]
 
@@ -70,7 +89,7 @@ lob_data_diff<-sqldf("Select
                       
                      performance_week as Week,
                      line_of_business as LOB,
-                      (bliss_solves+liveops_solves+jira_solves) as Actual_Solved,
+                      (bliss_solves+liveops_solves+jira_solves+zd_solves) as Actual_Solved,
                       (csat_survey + liveops_csat_score) as 'Actual_Responses',
                      round(Target_CSAT,2) as Target_CSAT,
                      round(CSAT,2) as Actual_CSAT,
@@ -97,6 +116,22 @@ lob_data_diff<-sqldf("Select
                      from lob_data"
 )
 lob_data_diff$Week<-as.Date(lob_data_diff$Week)
+
+#subsetting LOB level data
+lob_data<-lob_data[!lob_data$line_of_business %in% c("SITE"),]
+
+lob_solved_data_diff<-sqldf("Select 
+
+                    performance_week as Week,
+                    line_of_business as LOB,
+                    bliss_solves as Bliss_Solved,
+                    liveops_solves as Liveops_Solved,
+                    jira_solves as JIRA_Solved,
+                    zd_solves as Zendesk_Solved
+
+                    from lob_data")
+
+lob_solved_data_diff$Week<-as.Date(lob_solved_data_diff$Week)
 
 ##############################################################################################################################
 # cleaning data  LOB/Site level
@@ -164,10 +199,22 @@ tl_data_diff<- sqldf("select
                     ")
 
 tl_data_diff$Week<-as.Date(tl_data_diff$Week)
+
+tl_solved_data_diff<- sqldf("select
+                            performance_week as Week, 
+                            act_team_lead_email as TL,
+                            bliss_solves as Bliss_Solved,
+                            liveops_solves as Liveops_Solved,
+                            jira_solves as JIRA_Solved,
+                            zd_solves as Zendesk_Solved
+                            
+                            from agent_data")
+tl_solved_data_diff$Week<-as.Date(tl_solved_data_diff$Week)
+
 agent_data_diff<-sqldf(" Select
                      performance_week as Week, 
                      agent_email as Agent_Email, 
-                     (bliss_solves+liveops_solves+jira_solves) as Actual_Solved,
+                     (bliss_solves+liveops_solves+jira_solves+zd_solves) as Actual_Solved,
                      csat_survey as Actual_Responses,
                      round(Target_CSAT,2) as Target_CSAT,
                      round(CSAT,2) as Actual_CSAT,
@@ -188,6 +235,17 @@ agent_data_diff<-sqldf(" Select
                      from agent_data
                     ")
 agent_data_diff$Week<-as.Date(agent_data_diff$Week)
+
+agent_solved_data_diff<- sqldf("select
+                            performance_week as Week, 
+                            agent_email as Agent_Email,
+                            bliss_solves as Bliss_Solved,
+                            liveops_solves as Liveops_Solved,
+                            jira_solves as JIRA_Solved,
+                            zd_solves as Zendesk_Solved
+                            
+                            from agent_data")
+agent_solved_data_diff$Week<-as.Date(agent_solved_data_diff$Week)
 
 
 ##############################################################################################################################
