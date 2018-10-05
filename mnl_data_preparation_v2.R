@@ -2,6 +2,10 @@
 # libraries
 ###########################################################################################################################
 
+#install.packages(c("googlesheets", "sqldf", "dplyr", "data.table", "shiny", "DT", "shinydashboard", "highcharter"))
+
+#install.pac
+
 library(googlesheets)
 library(sqldf)
 library(dplyr)
@@ -256,9 +260,9 @@ regional_data<- gs_read(regional_level)
 colnames(regional_data)
 regional_data$wb<-as.character(regional_data$wb)
 regional_data$sla_6h<-as.numeric(regional_data$sla_6h)
-regional_data$sla_24h<-as.numberic(regional_data$sla_24h)
+regional_data$sla_24h<-as.numeric(regional_data$sla_24h)
 regional_data$shrinkage_actuals<-as.numeric(regional_data$shrinkage_actuals)
-regional_data$shrinkage_forecast<-as.numberic(regional_data$shrinkage_forecast)
+regional_data$shrinkage_forecast<-as.numeric(regional_data$shrinkage_forecast)
 
 BOP_data<- sqldf(" select 
                 wb as Week, 
