@@ -1,6 +1,7 @@
 source("/Users/ltayona/Downloads/mnl_rshiny_dash_v2-master/mnl_data_preparation_v2.R")
 
 
+
 ##### PRIMARY COLORS
 # Black - #000000
 # White - #FFFFFF
@@ -54,6 +55,13 @@ ui <- dashboardPage(
   # Skin Color
   #skin = "black",
   title = "Manila Lighthouse",
+
+ui <- dashboardPage(
+  
+  # Skin Color
+  skin = "blue",
+  title = "COE-UBR-MNL METRICS",
+
   
   # Dashboard Header
   dashboardHeader( title = tags$a( tags$head(tags$style(HTML(".name { color: white }"))),
@@ -860,7 +868,11 @@ ui <- dashboardPage(
                                     box(width = 12, title = "Resolution Efficiency", status="primary",solidHeader = TRUE, DT::dataTableOutput("Reseff_table"), collapsible = T, collapsed = F))
               ))),
       tabItem(tabName="Solved",
-              h2("Solves"), 
+
+        
+
+              h2("Solves"),
+
               fluidRow(box(width = 12,
                            #fluidRow(box(width = 12, title = "Conditions", status="primary" ,solidHeader = TRUE,collapsible = TRUE,collapsed = FALSE,
                            

@@ -19,6 +19,7 @@ server <- function(input, output, session) {
     getOption("highcharter.theme"),
     #hc_theme_darkunica(),
     hc_theme(
+
       colors = c("#276EF1","#47B275","#73A6FC","#263139","#5593FC","#47B275","#BEE4C2","#7356BF","#A89ECB"),
 
       chart = list(
@@ -30,23 +31,45 @@ server <- function(input, output, session) {
           color = '#000000',
           fontFamily = "Helvetica",
           font = 'bold 12px'
+
+      colors = c("#0074D9","#047878","#FFB733","#F57336","#7E827A"),
+      
+      #colors = c('red', 'green', 'blue'),
+      chart = list(
+        backgroundColor = "#000000"
+      ),
+      title = list(
+        style = list(
+          color = '#FFFFFF',
+          fontFamily = "Helvetica"
+
         )
       ),
       subtitle = list(
         style = list(
           color = '#666666',
+
           fontFamily = "Helvetica",
           font = 'bold 12px'
+
+          fontFamily = "Helvetica"
+
         )
       ),
       legend = list(
         itemStyle = list(
           fontFamily = 'Helvetica',
+
           color = '#000000'
         ),
         
           
       
+
+          color = '#FFFFFF'
+        ),
+        
+
         # xAxis = list(
         #   itemStyle = list(
         #     fontFamily = 'Helvetica',
